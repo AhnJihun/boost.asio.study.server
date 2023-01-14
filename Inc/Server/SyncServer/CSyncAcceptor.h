@@ -2,6 +2,7 @@
 
 #include <string>
 #include <memory>
+#include <thread>
 
 #include <boost/asio.hpp>
 
@@ -24,7 +25,10 @@ private :
 private :
     std::string mServerIp;
     unsigned short mPortNum;
+    bool mIsRun;
+    std::shared_ptr<std::thread> mAcceptThread;
     std::shared_ptr< boost::asio::ip::tcp::acceptor > mAcceptor;
+    
 
 public :
     CSyncAcceptor() = delete;
