@@ -9,7 +9,9 @@
 namespace SyncServer {
 class CSyncAcceptor {
 public :
-    CSyncAcceptor( const std::string& serverIp , unsigned short portNum );
+    CSyncAcceptor(  const std::string& serverIp ,
+                    boost::asio::io_service* ioService ,
+                    unsigned short portNum );
     virtual ~CSyncAcceptor();    
 
     bool StartAcceptor();
@@ -28,7 +30,7 @@ private :
     bool mIsRun;
     std::shared_ptr<std::thread> mAcceptThread;
     std::shared_ptr< boost::asio::ip::tcp::acceptor > mAcceptor;
-    
+    boost::asio::io_service* mIoService;
 
 public :
     CSyncAcceptor() = delete;
